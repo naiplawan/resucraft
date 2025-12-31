@@ -271,3 +271,61 @@
   background: rgba(139, 61, 255, 0.2);
   color: inherit;
 }
+
+/* Print Styles for Resume Export */
+@media print {
+  /* Reset page margins */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Hide non-printable elements */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Ensure backgrounds print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Prevent page breaks inside sections */
+  article, section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Reset shadows for print */
+  .shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl {
+    box-shadow: none !important;
+  }
+
+  /* Ensure links are visible */
+  a {
+    text-decoration: none !important;
+  }
+
+}
+
+/* Resume Preview Container */
+#resume-preview {
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure images render properly in templates */
+#resume-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better font rendering */
+#resume-preview {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

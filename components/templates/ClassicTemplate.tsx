@@ -8,210 +8,256 @@ interface ClassicTemplateProps {
   data: ResumeData;
 }
 
-const colorClasses: Record<ResumeData['accentColor'], { text: string; border: string }> = {
-  blue: { text: 'text-blue-700', border: 'border-blue-700' },
-  green: { text: 'text-green-700', border: 'border-green-700' },
-  purple: { text: 'text-purple-700', border: 'border-purple-700' },
-  red: { text: 'text-red-700', border: 'border-red-700' },
-  orange: { text: 'text-orange-700', border: 'border-orange-700' },
-  teal: { text: 'text-teal-700', border: 'border-teal-700' },
-  gray: { text: 'text-gray-800', border: 'border-gray-800' },
+const colorConfig: Record<ResumeData['accentColor'], {
+  text: string;
+  border: string;
+  bg: string;
+  headerBg: string;
+}> = {
+  blue: { text: 'text-blue-700', border: 'border-blue-700', bg: 'bg-blue-700', headerBg: 'bg-blue-50' },
+  green: { text: 'text-emerald-700', border: 'border-emerald-700', bg: 'bg-emerald-700', headerBg: 'bg-emerald-50' },
+  purple: { text: 'text-violet-700', border: 'border-violet-700', bg: 'bg-violet-700', headerBg: 'bg-violet-50' },
+  red: { text: 'text-rose-700', border: 'border-rose-700', bg: 'bg-rose-700', headerBg: 'bg-rose-50' },
+  orange: { text: 'text-amber-700', border: 'border-amber-700', bg: 'bg-amber-700', headerBg: 'bg-amber-50' },
+  teal: { text: 'text-teal-700', border: 'border-teal-700', bg: 'bg-teal-700', headerBg: 'bg-teal-50' },
+  gray: { text: 'text-gray-800', border: 'border-gray-800', bg: 'bg-gray-800', headerBg: 'bg-gray-100' },
 };
 
 export function ClassicTemplate({ data }: ClassicTemplateProps) {
-  const colors = colorClasses[data.accentColor];
+  const colors = colorConfig[data.accentColor];
   const { personalInfo, summary, experience, education, skills, certifications, projects, languages, awards, showSections } = data;
 
   return (
-    <div className="bg-white text-gray-900 p-8" style={{ width: '210mm', minHeight: '297mm' }}>
-      {/* Header with Photo */}
-      <div className="flex items-start gap-6 mb-6 border-b-2 border-gray-300 pb-6">
-        {showSections.photo && personalInfo.photo && (
-          <img
-            src={personalInfo.photo}
-            alt={personalInfo.fullName}
-            className="w-24 h-24 rounded-lg object-cover"
-          />
-        )}
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">{personalInfo.fullName}</h1>
-          <p className={`text-xl ${colors.text} font-semibold mb-3`}>{personalInfo.jobTitle}</p>
-          <div className="flex flex-wrap gap-4 text-sm text-gray-700">
-            {personalInfo.email && (
-              <div className="flex items-center gap-1">
-                <Mail size={14} />
-                <span>{personalInfo.email}</span>
-              </div>
-            )}
-            {personalInfo.phone && (
-              <div className="flex items-center gap-1">
-                <Phone size={14} />
-                <span>{personalInfo.phone}</span>
-              </div>
-            )}
-            {personalInfo.location && (
-              <div className="flex items-center gap-1">
-                <MapPin size={14} />
-                <span>{personalInfo.location}</span>
-              </div>
-            )}
-            {personalInfo.linkedin && (
-              <div className="flex items-center gap-1">
-                <Linkedin size={14} />
-                <span>{personalInfo.linkedin}</span>
-              </div>
-            )}
-            {personalInfo.website && (
-              <div className="flex items-center gap-1">
-                <Globe size={14} />
-                <span>{personalInfo.website}</span>
-              </div>
-            )}
+    <div className="bg-white text-gray-800 p-10 print:p-8" style={{ width: '210mm', minHeight: '297mm' }}>
+      {/* Header */}
+      <header className="mb-6">
+        <div className="flex items-start gap-5">
+          {showSections.photo && personalInfo.photo && (
+            <img
+              src={personalInfo.photo}
+              alt={personalInfo.fullName}
+              className="w-20 h-20 rounded object-cover border border-gray-200"
+            />
+          )}
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold text-gray-900 mb-1 tracking-tight">
+              {personalInfo.fullName || 'Your Name'}
+            </h1>
+            <p className={`text-xl ${colors.text} font-semibold mb-3`}>
+              {personalInfo.jobTitle || 'Professional Title'}
+            </p>
+
+            {/* Contact Row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-gray-600">
+              {personalInfo.email && (
+                <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                  <Mail size={14} className="text-gray-400" />
+                  <span>{personalInfo.email}</span>
+                </a>
+              )}
+              {personalInfo.phone && (
+                <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                  <Phone size={14} className="text-gray-400" />
+                  <span>{personalInfo.phone}</span>
+                </a>
+              )}
+              {personalInfo.location && (
+                <div className="flex items-center gap-1.5">
+                  <MapPin size={14} className="text-gray-400" />
+                  <span>{personalInfo.location}</span>
+                </div>
+              )}
+              {personalInfo.linkedin && (
+                <a href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} className="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                  <Linkedin size={14} className="text-gray-400" />
+                  <span>{personalInfo.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//i, 'linkedin.com/in/')}</span>
+                </a>
+              )}
+              {personalInfo.website && (
+                <a href={personalInfo.website.startsWith('http') ? personalInfo.website : `https://${personalInfo.website}`} className="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                  <Globe size={14} className="text-gray-400" />
+                  <span>{personalInfo.website.replace(/^https?:\/\/(www\.)?/i, '')}</span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </header>
+
+      {/* Divider */}
+      <div className={`h-1 ${colors.bg} mb-6`}></div>
 
       {/* Summary */}
       {showSections.summary && summary && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-2 uppercase tracking-wide`}>Professional Summary</h2>
+        <section className="mb-6">
+          <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 pb-1 border-b ${colors.border}`}>
+            Professional Summary
+          </h2>
           <p className="text-gray-700 leading-relaxed">{summary}</p>
-        </div>
+        </section>
       )}
 
       {/* Experience */}
       {showSections.experience && experience.length > 0 && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Experience</h2>
+        <section className="mb-6">
+          <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 pb-1 border-b ${colors.border}`}>
+            Professional Experience
+          </h2>
           <div className="space-y-4">
             {experience.map((exp) => (
-              <div key={exp.id}>
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="font-bold text-gray-900">{exp.position}</h3>
-                    <p className="font-semibold text-gray-800">{exp.company}{exp.location && ` - ${exp.location}`}</p>
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
-                  </div>
+              <article key={exp.id}>
+                <div className="flex justify-between items-baseline gap-4 mb-1">
+                  <h3 className="font-bold text-gray-900">{exp.position}</h3>
+                  <span className="text-sm text-gray-500 whitespace-nowrap">
+                    {exp.startDate} — {exp.current ? 'Present' : exp.endDate}
+                  </span>
                 </div>
-                {exp.description && <p className="text-gray-700 mt-2 whitespace-pre-line">{exp.description}</p>}
-              </div>
+                <p className="text-gray-700 font-medium">
+                  {exp.company}
+                  {exp.location && <span className="text-gray-500 font-normal"> • {exp.location}</span>}
+                </p>
+                {exp.description && (
+                  <div className="mt-2 text-gray-600 text-[0.9rem] leading-relaxed whitespace-pre-line">
+                    {exp.description}
+                  </div>
+                )}
+              </article>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       {/* Education */}
       {showSections.education && education.length > 0 && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Education</h2>
+        <section className="mb-6">
+          <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 pb-1 border-b ${colors.border}`}>
+            Education
+          </h2>
           <div className="space-y-3">
             {education.map((edu) => (
-              <div key={edu.id} className="flex justify-between">
-                <div>
-                  <p className="font-bold">{edu.degree} in {edu.field}</p>
-                  <p className="text-gray-800">{edu.institution}</p>
-                  {edu.gpa && <p className="text-sm text-gray-600">GPA: {edu.gpa}</p>}
-                  {edu.description && <p className="text-sm text-gray-700 mt-1">{edu.description}</p>}
+              <article key={edu.id}>
+                <div className="flex justify-between items-baseline gap-4">
+                  <div>
+                    <h3 className="font-bold text-gray-900">
+                      {edu.degree} in {edu.field}
+                    </h3>
+                    <p className="text-gray-700">{edu.institution}</p>
+                  </div>
+                  <span className="text-sm text-gray-500 whitespace-nowrap">
+                    {edu.startYear} — {edu.endYear}
+                  </span>
                 </div>
-                <div className="text-sm text-gray-600 text-right">
-                  <p>{edu.startYear} - {edu.endYear}</p>
-                </div>
-              </div>
+                {edu.gpa && <p className="text-sm text-gray-500 mt-1">GPA: {edu.gpa}</p>}
+                {edu.description && <p className="text-gray-600 text-sm mt-1.5">{edu.description}</p>}
+              </article>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* Skills */}
-      {showSections.skills && skills.length > 0 && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Skills</h2>
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <span
-                key={skill.id}
-                className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full"
-              >
-                {skill.name}
-                {skill.level && <span className="text-gray-500 ml-1">({skill.level})</span>}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Two Column Layout for Skills, Certifications, Languages */}
+      <div className="grid grid-cols-2 gap-6">
+        {/* Skills */}
+        {showSections.skills && skills.length > 0 && (
+          <section className={certifications.length === 0 && languages.length === 0 ? 'col-span-2' : ''}>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 pb-1 border-b ${colors.border}`}>
+              Skills
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span
+                  key={skill.id}
+                  className={`px-3 py-1 ${colors.headerBg} ${colors.text} text-sm rounded-md font-medium`}
+                >
+                  {skill.name}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
 
-      {/* Certifications */}
-      {showSections.certifications && certifications.length > 0 && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Certifications</h2>
-          <div className="space-y-2">
-            {certifications.map((cert) => (
-              <div key={cert.id} className="flex justify-between">
-                <div>
-                  <p className="font-semibold">{cert.name}</p>
-                  <p className="text-sm text-gray-600">{cert.issuer}</p>
+        {/* Certifications */}
+        {showSections.certifications && certifications.length > 0 && (
+          <section>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 pb-1 border-b ${colors.border}`}>
+              Certifications
+            </h2>
+            <div className="space-y-2">
+              {certifications.map((cert) => (
+                <div key={cert.id}>
+                  <p className="font-medium text-gray-900">{cert.name}</p>
+                  <p className="text-sm text-gray-500">{cert.issuer} • {cert.date}</p>
                 </div>
-                <div className="text-sm text-gray-600">{cert.date}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Languages */}
+        {showSections.languages && languages.length > 0 && (
+          <section>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 pb-1 border-b ${colors.border}`}>
+              Languages
+            </h2>
+            <div className="space-y-1">
+              {languages.map((lang) => (
+                <div key={lang.id} className="flex justify-between text-sm">
+                  <span className="font-medium text-gray-800">{lang.name}</span>
+                  {lang.proficiency && (
+                    <span className="text-gray-500 capitalize">{lang.proficiency}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
 
       {/* Projects */}
       {showSections.projects && projects.length > 0 && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Projects</h2>
+        <section className="mt-6">
+          <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 pb-1 border-b ${colors.border}`}>
+            Projects
+          </h2>
           <div className="space-y-3">
             {projects.map((project) => (
-              <div key={project.id}>
-                <p className="font-semibold">{project.name}</p>
-                {project.description && <p className="text-sm text-gray-700 mt-1">{project.description}</p>}
-                {project.technologies && project.technologies.length > 0 && (
-                  <p className="text-sm text-gray-600 mt-1">Technologies: {project.technologies.join(', ')}</p>
+              <article key={project.id}>
+                <h3 className="font-bold text-gray-900">{project.name}</h3>
+                {project.description && (
+                  <p className="text-gray-600 text-sm mt-1">{project.description}</p>
                 )}
-              </div>
+                {project.technologies && project.technologies.length > 0 && (
+                  <p className="text-sm text-gray-500 mt-1">
+                    <span className="font-medium">Technologies:</span> {project.technologies.join(', ')}
+                  </p>
+                )}
+              </article>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Languages */}
-      {showSections.languages && languages.length > 0 && (
-        <div className="mb-5">
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Languages</h2>
-          <div className="flex flex-wrap gap-3">
-            {languages.map((lang) => (
-              <span key={lang.id} className="text-sm">
-                <span className="font-medium">{lang.name}</span>
-                {lang.proficiency && <span className="text-gray-600"> - {lang.proficiency}</span>}
-              </span>
-            ))}
-          </div>
-        </div>
+        </section>
       )}
 
       {/* Awards */}
       {showSections.awards && awards.length > 0 && (
-        <div>
-          <h2 className={`text-lg font-bold ${colors.border} border-b-2 pb-1 mb-3 uppercase tracking-wide`}>Awards</h2>
+        <section className="mt-6">
+          <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 pb-1 border-b ${colors.border}`}>
+            Awards & Achievements
+          </h2>
           <div className="space-y-2">
             {awards.map((award) => (
-              <div key={award.id} className="flex justify-between">
+              <article key={award.id} className="flex justify-between items-start gap-4">
                 <div>
-                  <p className="font-semibold">{award.title}</p>
-                  {award.description && <p className="text-sm text-gray-600">{award.description}</p>}
+                  <h3 className="font-medium text-gray-900">{award.title}</h3>
+                  <p className="text-sm text-gray-500">{award.issuer}</p>
+                  {award.description && (
+                    <p className="text-sm text-gray-600 mt-1">{award.description}</p>
+                  )}
                 </div>
-                <div className="text-sm text-gray-600">
-                  <p>{award.issuer}</p>
-                  <p>{award.date}</p>
-                </div>
-              </div>
+                <span className="text-sm text-gray-500 whitespace-nowrap">{award.date}</span>
+              </article>
             ))}
           </div>
-        </div>
+        </section>
       )}
     </div>
   );
