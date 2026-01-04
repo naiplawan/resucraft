@@ -1,7 +1,10 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useRef } from 'react';
 import { ResumeData, emptyResumeData } from '@/types/resume';
+import { resumeDataSchema } from '@/lib/schemas';
+import { STORAGE_KEY, AUTOSAVE_DEBOUNCE_MS } from '@/lib/constants';
+import { toast } from 'sonner';
 
 interface ResumeContextType {
   resumeData: ResumeData;
@@ -37,31 +40,79 @@ interface ResumeContextType {
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'resucraft_draft';
+// Helper function to generate UUID
+function generateId(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback for older browsers
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
 export function ResumeProvider({ children }: { children: ReactNode }) {
   const [resumeData, setResumeData] = useState<ResumeData>(emptyResumeData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load from localStorage on mount
+  // Debounced save to localStorage
+  const saveToStorage = useCallback((data: ResumeData) => {
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
+
+    saveTimeoutRef.current = setTimeout(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (error) {
+        if (error instanceof Error && error.name === 'QuotaExceededError') {
+          toast.error('Storage full. Try removing some photos or reducing content.');
+        } else {
+          console.error('Failed to save resume:', error);
+          toast.error('Failed to save your resume. Please try again.');
+        }
+      }
+    }, AUTOSAVE_DEBOUNCE_MS);
+  }, []);
+
+  // Load from localStorage on mount with validation
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        setResumeData(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        const validated = resumeDataSchema.safeParse(parsed);
+
+        if (validated.success) {
+          setResumeData(validated.data);
+        } else {
+          console.warn('Invalid saved resume data, starting fresh:', validated.error);
+          toast.warning('Previous resume data was corrupted. Starting with a fresh resume.');
+        }
       } catch (e) {
         console.error('Failed to load saved resume:', e);
+        toast.error('Failed to load saved resume. Starting fresh.');
       }
     }
     setIsLoaded(true);
   }, []);
 
-  // Auto-save to localStorage
+  // Auto-save to localStorage when data changes
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(resumeData));
+      saveToStorage(resumeData);
     }
-  }, [resumeData, isLoaded]);
+
+    // Cleanup timeout on unmount
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
+  }, [resumeData, isLoaded, saveToStorage]);
 
   const updatePersonalInfo = (info: Partial<ResumeData['personalInfo']>) => {
     setResumeData(prev => ({
@@ -88,7 +139,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       experience: [
         ...prev.experience,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           company: '',
           position: '',
           startDate: '',
@@ -121,7 +172,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       education: [
         ...prev.education,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           institution: '',
           degree: '',
           field: '',
@@ -154,7 +205,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       skills: [
         ...prev.skills,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           name: '',
           level: 'intermediate',
           category: '',
@@ -183,7 +234,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       certifications: [
         ...prev.certifications,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           name: '',
           issuer: '',
           date: '',
@@ -213,7 +264,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       projects: [
         ...prev.projects,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           name: '',
           description: '',
           url: '',
@@ -243,7 +294,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       languages: [
         ...prev.languages,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           name: '',
           proficiency: 'conversational',
         },
@@ -271,7 +322,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       awards: [
         ...prev.awards,
         {
-          id: Date.now().toString(),
+          id: generateId(),
           title: '',
           issuer: '',
           date: '',
@@ -307,11 +358,23 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
 
   const resetResume = () => {
     setResumeData(emptyResumeData);
-    localStorage.removeItem(STORAGE_KEY);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      toast.success('Resume reset successfully');
+    } catch (error) {
+      console.error('Failed to clear storage:', error);
+    }
   };
 
   const loadResume = (data: ResumeData) => {
-    setResumeData(data);
+    const validated = resumeDataSchema.safeParse(data);
+    if (validated.success) {
+      setResumeData(validated.data);
+      toast.success('Resume loaded successfully');
+    } else {
+      toast.error('Invalid resume data format');
+      console.error('Validation error:', validated.error);
+    }
   };
 
   return (

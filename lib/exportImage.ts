@@ -1,6 +1,7 @@
 import html2canvas from 'html2canvas';
+import { PNG_WIDTH_PX, PNG_PADDING_PX, EXPORT_SCALE, RESUME_PREVIEW_ID } from './constants';
 
-export async function exportToPNG(elementId: string, filename: string = 'resume.png') {
+export async function exportToPNG(elementId: string = RESUME_PREVIEW_ID, filename: string = 'resume.png') {
   const element = document.getElementById(elementId);
   if (!element) {
     throw new Error('Resume element not found');
@@ -10,30 +11,39 @@ export async function exportToPNG(elementId: string, filename: string = 'resume.
   const clone = element.cloneNode(true) as HTMLElement;
   clone.style.position = 'absolute';
   clone.style.left = '-9999px';
-  clone.style.width = '800px';
-  clone.style.padding = '40px';
+  clone.style.width = `${PNG_WIDTH_PX}px`;
+  clone.style.padding = `${PNG_PADDING_PX}px`;
   clone.style.background = 'white';
   document.body.appendChild(clone);
 
   try {
     const canvas = await html2canvas(clone, {
-      scale: 2, // Higher quality
+      scale: EXPORT_SCALE,
       useCORS: true,
       logging: false,
       backgroundColor: '#ffffff',
     });
 
-    canvas.toBlob((blob) => {
-      if (blob) {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = filename;
-        link.click();
-        URL.revokeObjectURL(url);
-      }
+    // Use Promise-based approach for toBlob
+    const blob = await new Promise<Blob | null>((resolve) => {
+      canvas.toBlob(resolve, 'image/png');
     });
+
+    if (blob) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    return { success: true };
   } finally {
-    document.body.removeChild(clone);
+    try {
+      document.body.removeChild(clone);
+    } catch (e) {
+      console.warn('Failed to remove clone element:', e);
+    }
   }
 }

@@ -3,6 +3,8 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { Upload, X, Camera } from 'lucide-react';
 import { useResume } from '@/context/ResumeContext';
+import { VALID_PHOTO_TYPES, MAX_PHOTO_SIZE_BYTES } from '@/lib/constants';
+import { toast } from 'sonner';
 
 export function PhotoUpload() {
   const { resumeData, updatePersonalInfo } = useResume();
@@ -18,16 +20,19 @@ export function PhotoUpload() {
     setIsLoading(true);
 
     // Validate file type
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
-    if (!validTypes.includes(file.type)) {
-      setError('Please select a valid image (JPG, PNG, WebP, or GIF)');
+    if (!VALID_PHOTO_TYPES.includes(file.type as typeof VALID_PHOTO_TYPES[number])) {
+      const errorMsg = 'Please select a valid image (JPG, PNG, WebP, or GIF)';
+      setError(errorMsg);
+      toast.error(errorMsg);
       setIsLoading(false);
       return;
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('File size must be less than 5MB');
+    // Validate file size
+    if (file.size > MAX_PHOTO_SIZE_BYTES) {
+      const errorMsg = 'File size must be less than 5MB';
+      setError(errorMsg);
+      toast.error(errorMsg);
       setIsLoading(false);
       return;
     }
@@ -36,9 +41,12 @@ export function PhotoUpload() {
     reader.onload = (e) => {
       updatePersonalInfo({ photo: e.target?.result as string });
       setIsLoading(false);
+      toast.success('Photo uploaded successfully');
     };
     reader.onerror = () => {
-      setError('Failed to read file. Please try again.');
+      const errorMsg = 'Failed to read file. Please try again.';
+      setError(errorMsg);
+      toast.error(errorMsg);
       setIsLoading(false);
     };
     reader.readAsDataURL(file);
@@ -79,6 +87,7 @@ export function PhotoUpload() {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    toast.success('Photo removed');
   };
 
   const openFileDialog = () => {

@@ -13,12 +13,12 @@ import { EducationForm } from '@/components/forms/EducationForm';
 import { SkillsForm } from '@/components/forms/SkillsForm';
 import { CertificationsForm, ProjectsForm, LanguagesForm, AwardsForm } from '@/components/forms/OptionalForms';
 import { FormTextarea } from '@/components/forms/FormInput';
-import { exportToPDF } from '@/lib/exportPdf';
-import { exportToPNG } from '@/lib/exportImage';
 import { ModernTemplate } from '@/components/templates/ModernTemplate';
 import { ClassicTemplate } from '@/components/templates/ClassicTemplate';
 import { MinimalTemplate } from '@/components/templates/MinimalTemplate';
 import { CreativeTemplate } from '@/components/templates/CreativeTemplate';
+import { RESUME_PREVIEW_ID } from '@/lib/constants';
+import { toast } from 'sonner';
 import {
   User,
   Briefcase,
@@ -35,6 +35,7 @@ import {
   ChevronLeft,
   Sparkles,
   Image,
+  Loader2,
 } from 'lucide-react';
 
 type Section = 'template' | 'personal' | 'summary' | 'experience' | 'education' | 'skills' | 'certifications' | 'projects' | 'languages' | 'awards';
@@ -60,10 +61,12 @@ function BuilderContent() {
   const handleExportPDF = async () => {
     setIsExporting(true);
     try {
-      await exportToPDF('resume-preview', `${resumeData.personalInfo.fullName || 'resume'}.pdf`);
+      const { exportToPDF } = await import('@/lib/exportPdf');
+      await exportToPDF(RESUME_PREVIEW_ID, `${resumeData.personalInfo.fullName || 'resume'}.pdf`);
+      toast.success('PDF exported successfully');
     } catch (error) {
       console.error('Export failed:', error);
-      alert('Failed to export PDF. Please try again.');
+      toast.error(error instanceof Error ? error.message : 'Failed to export PDF. Please try again.');
     } finally {
       setIsExporting(false);
     }
@@ -72,10 +75,12 @@ function BuilderContent() {
   const handleExportPNG = async () => {
     setIsExporting(true);
     try {
-      await exportToPNG('resume-preview', `${resumeData.personalInfo.fullName || 'resume'}.png`);
+      const { exportToPNG } = await import('@/lib/exportImage');
+      await exportToPNG(RESUME_PREVIEW_ID, `${resumeData.personalInfo.fullName || 'resume'}.png`);
+      toast.success('PNG exported successfully');
     } catch (error) {
       console.error('Export failed:', error);
-      alert('Failed to export PNG. Please try again.');
+      toast.error(error instanceof Error ? error.message : 'Failed to export PNG. Please try again.');
     } finally {
       setIsExporting(false);
     }
@@ -198,8 +203,17 @@ function BuilderContent() {
               disabled={isExporting}
               className="w-full"
             >
-              <Download size={16} />
-              {isExporting ? 'Exporting...' : 'PDF'}
+              {isExporting ? (
+                <>
+                  <Loader2 size={16} className="mr-2 animate-spin" />
+                  Exporting...
+                </>
+              ) : (
+                <>
+                  <Download size={16} />
+                  PDF
+                </>
+              )}
             </Button>
             <Button
               variant="outline"
@@ -207,8 +221,17 @@ function BuilderContent() {
               disabled={isExporting}
               className="w-full"
             >
-              <Image size={16} />
-              PNG
+              {isExporting ? (
+                <>
+                  <Loader2 size={16} className="mr-2 animate-spin" />
+                  Exporting...
+                </>
+              ) : (
+                <>
+                  <Image size={16} />
+                  PNG
+                </>
+              )}
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-3 text-center">
@@ -235,7 +258,7 @@ function BuilderContent() {
         {/* Preview Content */}
         <div className="flex-1 overflow-y-auto bg-[#525659] p-8">
           <div className="flex justify-center">
-            <div id="resume-preview" className="shadow-2xl rounded-lg overflow-hidden">
+            <div id={RESUME_PREVIEW_ID} className="shadow-2xl rounded-lg overflow-hidden">
               {resumeData.template === 'modern' && <ModernTemplate data={resumeData} />}
               {resumeData.template === 'classic' && <ClassicTemplate data={resumeData} />}
               {resumeData.template === 'minimal' && <MinimalTemplate data={resumeData} />}

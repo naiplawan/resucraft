@@ -1,7 +1,8 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { A4_WIDTH_MM, A4_HEIGHT_MM, PDF_PADDING_MM, EXPORT_SCALE, RESUME_PREVIEW_ID } from './constants';
 
-export async function exportToPDF(elementId: string, filename: string = 'resume.pdf') {
+export async function exportToPDF(elementId: string = RESUME_PREVIEW_ID, filename: string = 'resume.pdf') {
   const element = document.getElementById(elementId);
   if (!element) {
     throw new Error('Resume element not found');
@@ -11,14 +12,14 @@ export async function exportToPDF(elementId: string, filename: string = 'resume.
   const clone = element.cloneNode(true) as HTMLElement;
   clone.style.position = 'absolute';
   clone.style.left = '-9999px';
-  clone.style.width = '210mm'; // A4 width
-  clone.style.padding = '15mm';
+  clone.style.width = `${A4_WIDTH_MM}mm`;
+  clone.style.padding = `${PDF_PADDING_MM}mm`;
   clone.style.background = 'white';
   document.body.appendChild(clone);
 
   try {
     const canvas = await html2canvas(clone, {
-      scale: 2, // Higher quality
+      scale: EXPORT_SCALE,
       useCORS: true,
       logging: false,
       backgroundColor: '#ffffff',
@@ -31,8 +32,8 @@ export async function exportToPDF(elementId: string, filename: string = 'resume.
       format: 'a4',
     });
 
-    const imgWidth = 210; // A4 width in mm
-    const pageHeight = 297; // A4 height in mm
+    const imgWidth = A4_WIDTH_MM;
+    const pageHeight = A4_HEIGHT_MM;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     let heightLeft = imgHeight;
     let position = 0;
@@ -48,7 +49,12 @@ export async function exportToPDF(elementId: string, filename: string = 'resume.
     }
 
     pdf.save(filename);
+    return { success: true };
   } finally {
-    document.body.removeChild(clone);
+    try {
+      document.body.removeChild(clone);
+    } catch (e) {
+      console.warn('Failed to remove clone element:', e);
+    }
   }
 }

@@ -2,76 +2,21 @@
 
 import React from 'react';
 import { Mail, Phone, MapPin, Linkedin, Globe, Calendar, Briefcase, GraduationCap } from 'lucide-react';
-import { ResumeData } from '@/types/resume';
+import { ResumeData, AccentColor } from '@/types/resume';
+import { A4_WIDTH_MM, A4_HEIGHT_MM, ACCENT_COLOR_MAP, type AccentColorKey } from '@/lib/constants';
 
 interface ModernTemplateProps {
   data: ResumeData;
 }
 
-const colorConfig: Record<ResumeData['accentColor'], {
-  sidebar: string;
-  sidebarDark: string;
-  text: string;
-  border: string;
-  light: string;
-}> = {
-  blue: {
-    sidebar: 'bg-slate-800',
-    sidebarDark: 'bg-slate-900',
-    text: 'text-blue-600',
-    border: 'border-blue-600',
-    light: 'bg-blue-50'
-  },
-  green: {
-    sidebar: 'bg-emerald-800',
-    sidebarDark: 'bg-emerald-900',
-    text: 'text-emerald-600',
-    border: 'border-emerald-600',
-    light: 'bg-emerald-50'
-  },
-  purple: {
-    sidebar: 'bg-violet-800',
-    sidebarDark: 'bg-violet-900',
-    text: 'text-violet-600',
-    border: 'border-violet-600',
-    light: 'bg-violet-50'
-  },
-  red: {
-    sidebar: 'bg-rose-800',
-    sidebarDark: 'bg-rose-900',
-    text: 'text-rose-600',
-    border: 'border-rose-600',
-    light: 'bg-rose-50'
-  },
-  orange: {
-    sidebar: 'bg-amber-800',
-    sidebarDark: 'bg-amber-900',
-    text: 'text-amber-600',
-    border: 'border-amber-600',
-    light: 'bg-amber-50'
-  },
-  teal: {
-    sidebar: 'bg-teal-800',
-    sidebarDark: 'bg-teal-900',
-    text: 'text-teal-600',
-    border: 'border-teal-600',
-    light: 'bg-teal-50'
-  },
-  gray: {
-    sidebar: 'bg-gray-800',
-    sidebarDark: 'bg-gray-900',
-    text: 'text-gray-700',
-    border: 'border-gray-700',
-    light: 'bg-gray-100'
-  },
-};
+const getAccentColors = (color: AccentColor) => ACCENT_COLOR_MAP[color as AccentColorKey];
 
 export function ModernTemplate({ data }: ModernTemplateProps) {
-  const colors = colorConfig[data.accentColor];
+  const colors = getAccentColors(data.accentColor);
   const { personalInfo, summary, experience, education, skills, certifications, projects, languages, awards, showSections } = data;
 
   return (
-    <div className="flex min-h-[297mm] bg-white text-gray-800 print:text-[11pt]" style={{ width: '210mm' }}>
+    <div className="flex min-h-[297mm] bg-white text-gray-800 print:text-[11pt]" style={{ width: `${A4_WIDTH_MM}mm` }}>
       {/* Sidebar - Narrower for better content space */}
       <aside className={`w-[72mm] ${colors.sidebar} text-white p-6 print:p-5 flex flex-col`}>
         {/* Photo */}
@@ -213,7 +158,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {showSections.summary && summary && (
           <section className="mb-6">
             <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 flex items-center gap-2`}>
-              <span className={`w-8 h-0.5 ${colors.border.replace('border', 'bg')}`}></span>
+              <span className={`w-8 h-0.5 ${colors.light.replace('bg-', 'bg-').replace('50', '600')}`}></span>
               Professional Summary
             </h2>
             <p className="text-gray-600 leading-relaxed text-[0.9rem]">{summary}</p>
@@ -284,7 +229,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {showSections.projects && projects.length > 0 && (
           <section>
             <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`}>
-              <span className={`w-8 h-0.5 ${colors.border.replace('border', 'bg')}`}></span>
+              <span className={`w-8 h-0.5 ${colors.light.replace('bg-', 'bg-').replace('50', '600')}`}></span>
               Projects
             </h2>
             <div className="space-y-3">
