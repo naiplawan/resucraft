@@ -57,113 +57,114 @@
 }
 
 :root {
-  /* Canva Purple Primary Palette */
+  /* Blue Ocean Palette */
   --radius: 0.75rem;
 
   /* Base colors */
-  --background: #ffffff;
-  --foreground: #0d1216;
+  --background: #f8fafc;
+  --foreground: #0c1929;
 
   /* Cards & Surfaces */
   --card: #ffffff;
-  --card-foreground: #0d1216;
+  --card-foreground: #0c1929;
   --popover: #ffffff;
-  --popover-foreground: #0d1216;
+  --popover-foreground: #0c1929;
 
-  /* Canva Purple - Primary */
-  --primary: #8b3dff;
+  /* Ocean Deep Blue - Primary */
+  --primary: #0369a1;
   --primary-foreground: #ffffff;
 
-  /* Secondary - Soft purple/lavender */
-  --secondary: #f3e8ff;
-  --secondary-foreground: #7c3aed;
+  /* Secondary - Sea foam blue */
+  --secondary: #e0f2fe;
+  --secondary-foreground: #0369a1;
 
-  /* Muted - Light grays */
-  --muted: #f5f5f7;
-  --muted-foreground: #6b7280;
+  /* Muted - Light sea mist */
+  --muted: #f0f9ff;
+  --muted-foreground: #64748b;
 
-  /* Accent - Teal/Cyan (Canva secondary) */
-  --accent: #00c4cc;
+  /* Accent - Aqua/Turquoise */
+  --accent: #06b6d4;
   --accent-foreground: #ffffff;
 
-  /* Destructive - Coral/Red */
-  --destructive: #ff4f4f;
+  /* Destructive - Coral sunset */
+  --destructive: #ff6b6b;
 
   /* Borders & Inputs */
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #8b3dff;
+  --border: #cbd5e1;
+  --input: #cbd5e1;
+  --ring: #0369a1;
 
-  /* Canva Chart Colors - Vibrant palette */
-  --chart-1: #8b3dff;
-  --chart-2: #00c4cc;
-  --chart-3: #ff6b6b;
-  --chart-4: #ffc233;
-  --chart-5: #01c38d;
+  /* Ocean Chart Colors - Marine palette */
+  --chart-1: #0369a1;
+  --chart-2: #06b6d4;
+  --chart-3: #0ea5e9;
+  --chart-4: #14b8a6;
+  --chart-5: #f59e0b;
 
-  /* Sidebar - Clean white with purple accents */
+  /* Sidebar - Ocean breeze */
   --sidebar: #ffffff;
-  --sidebar-foreground: #0d1216;
-  --sidebar-primary: #8b3dff;
+  --sidebar-foreground: #0c1929;
+  --sidebar-primary: #0369a1;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f3e8ff;
-  --sidebar-accent-foreground: #7c3aed;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: #8b3dff;
+  --sidebar-accent: #e0f2fe;
+  --sidebar-accent-foreground: #0369a1;
+  --sidebar-border: #cbd5e1;
+  --sidebar-ring: #0369a1;
 
-  /* Custom Canva colors for easy access */
-  --canva-purple: #8b3dff;
-  --canva-purple-dark: #7c3aed;
-  --canva-purple-light: #a855f7;
-  --canva-teal: #00c4cc;
-  --canva-coral: #ff6b6b;
-  --canva-yellow: #ffc233;
-  --canva-green: #01c38d;
-  --canva-pink: #ff66c4;
-  --canva-blue: #0096ff;
+  /* Ocean colors for easy access */
+  --ocean-deep: #0369a1;
+  --ocean-deep-dark: #0c4a6e;
+  --ocean-deep-light: #0ea5e9;
+  --ocean-aqua: #06b6d4;
+  --ocean-teal: #14b8a6;
+  --ocean-sky: #0ea5e9;
+  --ocean-foam: #ccfbf1;
+  --ocean-coral: #ff6b6b;
+  --ocean-sunset: #f59e0b;
+  --ocean-pearl: #f1f5f9;
 }
 
 .dark {
-  --background: #0d1216;
-  --foreground: #f9fafb;
+  --background: #0c1929;
+  --foreground: #f1f5f9;
 
-  --card: #1a1f25;
-  --card-foreground: #f9fafb;
-  --popover: #1a1f25;
-  --popover-foreground: #f9fafb;
+  --card: #0f2744;
+  --card-foreground: #f1f5f9;
+  --popover: #0f2744;
+  --popover-foreground: #f1f5f9;
 
-  --primary: #a855f7;
+  --primary: #0ea5e9;
   --primary-foreground: #ffffff;
 
-  --secondary: #2d1b4e;
-  --secondary-foreground: #c4b5fd;
+  --secondary: #0c4a6e;
+  --secondary-foreground: #bae6fd;
 
-  --muted: #1f2937;
-  --muted-foreground: #9ca3af;
+  --muted: #0f2744;
+  --muted-foreground: #94a3b8;
 
-  --accent: #00c4cc;
+  --accent: #06b6d4;
   --accent-foreground: #ffffff;
 
   --destructive: #ff6b6b;
 
-  --border: #374151;
-  --input: #374151;
-  --ring: #a855f7;
+  --border: #1e3a5f;
+  --input: #1e3a5f;
+  --ring: #0ea5e9;
 
-  --chart-1: #a855f7;
+  --chart-1: #0ea5e9;
   --chart-2: #22d3ee;
-  --chart-3: #fb7185;
-  --chart-4: #fbbf24;
-  --chart-5: #34d399;
+  --chart-3: #38bdf8;
+  --chart-4: #2dd4bf;
+  --chart-5: #fbbf24;
 
-  --sidebar: #1a1f25;
-  --sidebar-foreground: #f9fafb;
-  --sidebar-primary: #a855f7;
+  --sidebar: #0f2744;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #0ea5e9;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2d1b4e;
-  --sidebar-accent-foreground: #c4b5fd;
-  --sidebar-border: #374151;
-  --sidebar-ring: #a855f7;
+  --sidebar-accent: #0c4a6e;
+  --sidebar-accent-foreground: #bae6fd;
+  --sidebar-border: #1e3a5f;
+  --sidebar-ring: #0ea5e9;
 }
 
 @layer base {
@@ -187,40 +188,40 @@
   }
 }
 
-/* Canva-style utility classes */
+/* Ocean-inspired utility classes */
 @layer utilities {
   /* Gradient backgrounds */
-  .bg-canva-gradient {
-    background: linear-gradient(135deg, #8b3dff 0%, #00c4cc 100%);
+  .bg-ocean-gradient {
+    background: linear-gradient(135deg, #0369a1 0%, #06b6d4 100%);
   }
 
-  .bg-canva-gradient-soft {
-    background: linear-gradient(135deg, #f3e8ff 0%, #e0f7fa 100%);
+  .bg-ocean-gradient-soft {
+    background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
   }
 
   /* Text gradients */
-  .text-canva-gradient {
-    background: linear-gradient(135deg, #8b3dff 0%, #00c4cc 100%);
+  .text-ocean-gradient {
+    background: linear-gradient(135deg, #0369a1 0%, #06b6d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Canva shadow styles */
-  .shadow-canva {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  /* Ocean shadow styles */
+  .shadow-ocean {
+    box-shadow: 0 2px 8px rgba(3, 105, 161, 0.08), 0 1px 2px rgba(3, 105, 161, 0.04);
   }
 
-  .shadow-canva-md {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.04);
+  .shadow-ocean-md {
+    box-shadow: 0 4px 16px rgba(3, 105, 161, 0.1), 0 2px 4px rgba(3, 105, 161, 0.04);
   }
 
-  .shadow-canva-lg {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.04);
+  .shadow-ocean-lg {
+    box-shadow: 0 8px 32px rgba(3, 105, 161, 0.12), 0 4px 8px rgba(3, 105, 161, 0.04);
   }
 
-  .shadow-canva-purple {
-    box-shadow: 0 4px 20px rgba(139, 61, 255, 0.25);
+  .shadow-ocean-deep {
+    box-shadow: 0 4px 20px rgba(3, 105, 161, 0.25);
   }
 
   /* Hover lift effect */
@@ -230,24 +231,24 @@
 
   .hover-lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 32px rgba(3, 105, 161, 0.12);
   }
 
-  /* Canva button styles */
-  .btn-canva {
+  /* Ocean button styles */
+  .btn-ocean {
     @apply rounded-lg font-semibold transition-all duration-200;
   }
 
-  .btn-canva:hover {
+  .btn-ocean:hover {
     transform: translateY(-1px);
   }
 
-  .btn-canva:active {
+  .btn-ocean:active {
     transform: translateY(0);
   }
 }
 
-/* Custom scrollbar - Canva style */
+/* Custom scrollbar - Ocean style */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -258,17 +259,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #94a3b8;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #64748b;
 }
 
-/* Selection color */
+/* Selection color - Ocean blue */
 ::selection {
-  background: rgba(139, 61, 255, 0.2);
+  background: rgba(3, 105, 161, 0.2);
   color: inherit;
 }
 
