@@ -72,6 +72,47 @@ const colorConfig: Record<ResumeData['accentColor'], {
     light: 'bg-gray-100',
     gradient: 'from-gray-700 to-gray-500'
   },
+  // Vintage colors
+  brown: {
+    primary: 'bg-[#6b4423]',
+    primaryBg: 'bg-[#6b4423]',
+    secondary: 'bg-[#d4c9b8]',
+    text: 'text-[#8b6914]',
+    light: 'bg-[#f5f0e8]',
+    gradient: 'from-[#6b4423] to-[#8b6914]'
+  },
+  sepia: {
+    primary: 'bg-[#8b6914]',
+    primaryBg: 'bg-[#8b6914]',
+    secondary: 'bg-[#d4c9b8]',
+    text: 'text-[#a67c52]',
+    light: 'bg-[#f5f0e8]',
+    gradient: 'from-[#8b6914] to-[#a67c52]'
+  },
+  gold: {
+    primary: 'bg-[#c4a35a]',
+    primaryBg: 'bg-[#8b6914]',
+    secondary: 'bg-[#ebe4d8]',
+    text: 'text-[#c4a35a]',
+    light: 'bg-[#faf7f2]',
+    gradient: 'from-[#c4a35a] to-[#d4a574]'
+  },
+  burgundy: {
+    primary: 'bg-[#a63d26]',
+    primaryBg: 'bg-[#6b1c23]',
+    secondary: 'bg-[#e8dcc8]',
+    text: 'text-[#a63d26]',
+    light: 'bg-[#f5f0e8]',
+    gradient: 'from-[#6b1c23] to-[#a63d26]'
+  },
+  forest: {
+    primary: 'bg-[#5a7a64]',
+    primaryBg: 'bg-[#3d5a47]',
+    secondary: 'bg-[#d4c9b8]',
+    text: 'text-[#5a7a64]',
+    light: 'bg-[#f5f0e8]',
+    gradient: 'from-[#3d5a47] to-[#5a7a64]'
+  },
 };
 
 export function CreativeTemplate({ data }: CreativeTemplateProps) {

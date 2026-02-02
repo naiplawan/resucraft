@@ -24,7 +24,7 @@ export function FormInput({ label, error, className, id, ...props }: FormInputPr
   return (
     <div className="w-full space-y-2">
       {label && (
-        <Label htmlFor={inputId} className="text-sm font-medium text-foreground">
+        <Label htmlFor={inputId} className="text-sm font-medium text-foreground cursor-pointer">
           {label}
         </Label>
       )}
@@ -35,9 +35,10 @@ export function FormInput({ label, error, className, id, ...props }: FormInputPr
           className
         )}
         aria-invalid={!!error}
+        aria-describedby={error ? `${inputId}-error` : undefined}
         {...props}
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p id={`${inputId}-error`} className="text-sm text-destructive" role="alert">{error}</p>}
     </div>
   );
 }
@@ -53,7 +54,7 @@ export function FormTextarea({ label, error, className, id, ...props }: FormText
   return (
     <div className="w-full space-y-2">
       {label && (
-        <Label htmlFor={textareaId} className="text-sm font-medium text-foreground">
+        <Label htmlFor={textareaId} className="text-sm font-medium text-foreground cursor-pointer">
           {label}
         </Label>
       )}
@@ -64,9 +65,10 @@ export function FormTextarea({ label, error, className, id, ...props }: FormText
           className
         )}
         aria-invalid={!!error}
+        aria-describedby={error ? `${textareaId}-error` : undefined}
         {...props}
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p id={`${textareaId}-error`} className="text-sm text-destructive" role="alert">{error}</p>}
     </div>
   );
 }
@@ -92,37 +94,40 @@ export function FormSelect({
   className,
   disabled
 }: FormSelectProps) {
+  const selectId = label?.toLowerCase().replace(/\s+/g, '-');
+
   return (
     <div className="w-full space-y-2">
       {label && (
-        <Label className="text-sm font-medium text-foreground">
+        <Label htmlFor={selectId} className="text-sm font-medium text-foreground cursor-pointer">
           {label}
         </Label>
       )}
       <Select value={value} onValueChange={onChange} disabled={disabled}>
         <SelectTrigger
+          id={selectId}
           className={cn(
-            'w-full h-11 rounded-xl border-2 transition-all duration-200',
-            'hover:border-primary/30 focus:border-primary focus:ring-2 focus:ring-primary/20',
+            'w-full h-11 rounded-sm border-2 transition-all duration-200 cursor-pointer',
+            'hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20',
             error && 'border-destructive focus:ring-destructive/20',
             className
           )}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent className="rounded-xl border-2 shadow-canva-md">
+        <SelectContent className="rounded-sm border-2 shadow-vintage">
           {options.map((option) => (
             <SelectItem
               key={option.value}
               value={option.value}
-              className="rounded-lg cursor-pointer"
+              className="rounded-sm cursor-pointer touch-target"
             >
               {option.label}
             </SelectItem>
           ))}
         </SelectContent>
       </Select>
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
     </div>
   );
 }

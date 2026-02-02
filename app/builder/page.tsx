@@ -139,21 +139,26 @@ function BuilderContent() {
   return (
     <div className="flex h-screen bg-muted/30">
       {/* Sidebar */}
-      <div className="w-[420px] bg-background border-r border-border flex flex-col">
+      <div className="w-[420px] bg-card border-r-2 border-border flex flex-col">
         {/* Header */}
-        <div className="p-4 border-b border-border">
+        <div className="p-4 border-b-2 border-border">
           <div className="flex items-center justify-between mb-4">
-            <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
               <ChevronLeft size={20} />
               <span className="text-sm font-medium">Back</span>
             </Link>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-canva-gradient flex items-center justify-center">
-                <FileText className="text-white" size={16} />
+              <div className="w-8 h-8 border-2 border-vintage-brown bg-gradient-primary flex items-center justify-center">
+                <FileText className="text-primary-foreground" size={16} />
               </div>
-              <span className="font-bold">ResuCraft</span>
+              <span className="deco-heading font-bold">ResuCraft</span>
             </div>
-            <Button variant="ghost" size="sm" onClick={resetResume} className="text-muted-foreground">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={resetResume}
+              className="text-muted-foreground hover:bg-muted/50"
+            >
               <RotateCcw size={16} />
             </Button>
           </div>
@@ -168,10 +173,10 @@ function BuilderContent() {
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
                   className={`
-                    flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all
+                    flex items-center gap-2 px-3 py-2 rounded-sm text-sm font-medium whitespace-nowrap transition-all cursor-pointer border-2
                     ${isActive
-                      ? 'bg-primary text-white shadow-md'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                      ? 'bg-primary text-primary-foreground border-primary shadow-vintage'
+                      : 'text-muted-foreground border-transparent hover:bg-muted/80 hover:text-foreground hover:border-vintage-gold/30'
                     }
                   `}
                 >
@@ -186,8 +191,8 @@ function BuilderContent() {
         {/* Form Content */}
         <div className="flex-1 overflow-y-auto p-6">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold flex items-center gap-2">
-              {currentSectionData && <currentSectionData.icon size={22} className="text-primary" />}
+            <h2 className="text-xl deco-heading flex items-center gap-2">
+              {currentSectionData && <currentSectionData.icon size={22} className="text-vintage-gold" />}
               {currentSectionData?.label}
             </h2>
           </div>
@@ -195,12 +200,13 @@ function BuilderContent() {
         </div>
 
         {/* Export Section */}
-        <div className="p-4 border-t border-border bg-background">
+        <div className="p-4 border-t-2 border-border bg-background/50">
           <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">Export your resume</p>
           <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={handleExportPDF}
               disabled={isExporting}
+              variant="vintage"
               className="w-full"
             >
               {isExporting ? (
@@ -216,7 +222,7 @@ function BuilderContent() {
               )}
             </Button>
             <Button
-              variant="outline"
+              variant="vintage-outline"
               onClick={handleExportPNG}
               disabled={isExporting}
               className="w-full"
@@ -243,22 +249,22 @@ function BuilderContent() {
       {/* Preview Area */}
       <div className="flex-1 overflow-hidden flex flex-col">
         {/* Preview Header */}
-        <div className="h-14 bg-background border-b border-border px-6 flex items-center justify-between shrink-0">
+        <div className="h-14 bg-card border-b-2 border-border px-6 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#01c38d] animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-vintage-gold animate-pulse" />
             <span className="text-sm text-muted-foreground">Live Preview</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-xs text-muted-foreground px-3 py-1 rounded-full bg-muted">
+            <span className="text-xs text-muted-foreground px-3 py-1 border-2 border-vintage-gold/30 bg-vintage-cream">
               {resumeData.template.charAt(0).toUpperCase() + resumeData.template.slice(1)} Template
             </span>
           </div>
         </div>
 
         {/* Preview Content */}
-        <div className="flex-1 overflow-y-auto bg-[#525659] p-8">
+        <div className="flex-1 overflow-y-auto bg-[#3d3a36] p-8">
           <div className="flex justify-center">
-            <div id={RESUME_PREVIEW_ID} className="shadow-2xl rounded-lg overflow-hidden">
+            <div id={RESUME_PREVIEW_ID} className="shadow-vintage-deep rounded-sm overflow-hidden">
               {resumeData.template === 'modern' && <ModernTemplate data={resumeData} />}
               {resumeData.template === 'classic' && <ClassicTemplate data={resumeData} />}
               {resumeData.template === 'minimal' && <MinimalTemplate data={resumeData} />}

@@ -16,6 +16,12 @@ const colorConfig: Record<ResumeData['accentColor'], string> = {
   orange: 'text-amber-600',
   teal: 'text-teal-600',
   gray: 'text-gray-600',
+  // Vintage colors
+  brown: 'text-[#8b6914]',
+  sepia: 'text-[#a67c52]',
+  gold: 'text-[#c4a35a]',
+  burgundy: 'text-[#a63d26]',
+  forest: 'text-[#5a7a64]',
 };
 
 const borderConfig: Record<ResumeData['accentColor'], string> = {
@@ -26,6 +32,12 @@ const borderConfig: Record<ResumeData['accentColor'], string> = {
   orange: 'border-amber-200',
   teal: 'border-teal-200',
   gray: 'border-gray-300',
+  // Vintage colors
+  brown: 'border-[#d4c9b8]',
+  sepia: 'border-[#d4c9b8]',
+  gold: 'border-[#ebe4d8]',
+  burgundy: 'border-[#e8dcc8]',
+  forest: 'border-[#d4c9b8]',
 };
 
 export function MinimalTemplate({ data }: MinimalTemplateProps) {

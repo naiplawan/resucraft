@@ -70,7 +70,7 @@ export interface Award {
 }
 
 export type TemplateType = 'modern' | 'classic' | 'minimal' | 'creative';
-export type AccentColor = 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'teal' | 'gray';
+export type AccentColor = 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'teal' | 'gray' | 'brown' | 'sepia' | 'gold' | 'burgundy' | 'forest';
 
 export interface ResumeData {
   template: TemplateType;
@@ -100,7 +100,7 @@ export interface ResumeData {
 
 export const emptyResumeData: ResumeData = {
   template: 'modern',
-  accentColor: 'blue',
+  accentColor: 'brown',
   personalInfo: {
     fullName: '',
     jobTitle: '',

@@ -5,38 +5,42 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-md hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md",
+          "bg-primary text-primary-foreground shadow-vintage hover:bg-primary/90 hover:shadow-vintage-deep active:shadow-vintage",
         destructive:
-          "bg-destructive text-white shadow-md hover:bg-destructive/90 hover:shadow-lg hover:-translate-y-0.5",
+          "bg-destructive text-destructive-foreground shadow-vintage hover:bg-destructive/90 hover:shadow-vintage-deep active:shadow-vintage",
         outline:
-          "border-2 border-border bg-background hover:bg-muted hover:border-primary/50 hover:-translate-y-0.5",
+          "border-2 border-border bg-background hover:bg-muted hover:border-primary active:bg-muted/80 shadow-vintage",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:-translate-y-0.5",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70 shadow-vintage",
         ghost:
-          "hover:bg-muted hover:text-foreground",
+          "hover:bg-muted hover:text-foreground active:bg-muted/80",
         link:
-          "text-primary underline-offset-4 hover:underline",
-        // Canva-specific variants
-        gradient:
-          "bg-canva-gradient text-white shadow-md hover:shadow-canva-purple hover:-translate-y-0.5 active:translate-y-0",
-        soft:
-          "bg-primary/10 text-primary hover:bg-primary/20 hover:-translate-y-0.5",
-        teal:
-          "bg-[#00c4cc] text-white shadow-md hover:bg-[#00b3bb] hover:shadow-lg hover:-translate-y-0.5",
+          "text-primary underline-offset-4 hover:underline active:underline",
+        // Vintage themed variants
+        vintage:
+          "bg-gradient-primary text-white shadow-vintage hover:shadow-vintage-deco active:shadow-vintage",
+        "vintage-gold":
+          "bg-gradient-gold text-vintage-ink shadow-vintage hover:shadow-vintage-deep active:shadow-vintage",
+        "vintage-outline":
+          "border-2 border-vintage-brown bg-paper-texture text-vintage-brown hover:bg-vintage-cream active:bg-muted shadow-vintage",
+        "vintage-paper":
+          "paper-texture text-vintage-brown border-2 border-vintage-brown/30 shadow-vintage hover:border-vintage-brown active:bg-muted",
+        deco:
+          "border-deco bg-paper-texture text-vintage-brown shadow-vintage hover:shadow-vintage-deep",
       },
       size: {
-        default: "h-10 px-5 py-2 rounded-xl",
-        sm: "h-8 rounded-lg gap-1.5 px-3 text-xs",
-        lg: "h-12 rounded-xl px-8 text-base",
-        xl: "h-14 rounded-2xl px-10 text-lg",
-        icon: "size-10 rounded-xl",
-        "icon-sm": "size-8 rounded-lg",
-        "icon-lg": "size-12 rounded-xl",
+        default: "h-11 px-6 py-2 rounded-sm touch-target",
+        sm: "h-9 rounded-sm gap-1.5 px-3 text-xs touch-target",
+        lg: "h-12 rounded-sm px-8 text-base touch-target",
+        xl: "h-14 rounded-sm px-10 text-lg touch-target",
+        icon: "size-11 rounded-sm touch-target",
+        "icon-sm": "size-9 rounded-sm touch-target",
+        "icon-lg": "size-12 rounded-sm touch-target",
       },
     },
     defaultVariants: {

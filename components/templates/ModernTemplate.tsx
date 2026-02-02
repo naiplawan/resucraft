@@ -16,9 +16,9 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
   const { personalInfo, summary, experience, education, skills, certifications, projects, languages, awards, showSections } = data;
 
   return (
-    <div className="flex min-h-[297mm] bg-white text-gray-800 print:text-[11pt]" style={{ width: `${A4_WIDTH_MM}mm` }}>
-      {/* Sidebar - Narrower for better content space */}
-      <aside className={`w-[72mm] ${colors.sidebar} text-white p-6 print:p-5 flex flex-col`}>
+    <div className="flex min-h-[297mm] bg-[#faf7f2] text-[#2c2416] print:text-[11pt]" style={{ width: `${A4_WIDTH_MM}mm`, fontFamily: "'Didact Gothic', serif" }}>
+      {/* Sidebar - Vintage styled */}
+      <aside className={`w-[72mm] ${colors.sidebar} text-[#faf7f2] p-6 print:p-5 flex flex-col border-r-2 border-[#d4c9b8]`}>
         {/* Photo */}
         {showSections.photo && personalInfo.photo && (
           <div className="mb-6 flex justify-center">
@@ -32,7 +32,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Contact Section */}
         <div className="mb-6">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-3 pb-2 border-b border-white/20">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-white/70 mb-3 pb-2 border-b-2 border-white/20" style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
             Contact
           </h3>
           <div className="space-y-2.5 text-sm">
@@ -72,14 +72,14 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Skills */}
         {showSections.skills && skills.length > 0 && (
           <div className="mb-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-3 pb-2 border-b border-white/20">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white/70 mb-3 pb-2 border-b-2 border-white/20" style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
               Skills
             </h3>
             <div className="flex flex-wrap gap-1.5">
               {skills.map((skill) => (
                 <span
                   key={skill.id}
-                  className="px-2.5 py-1 bg-white/10 rounded text-xs font-medium"
+                  className="px-2.5 py-1 bg-white/10 border border-white/20 text-xs font-medium"
                 >
                   {skill.name}
                 </span>
@@ -91,7 +91,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Languages */}
         {showSections.languages && languages.length > 0 && (
           <div className="mb-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-3 pb-2 border-b border-white/20">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white/70 mb-3 pb-2 border-b-2 border-white/20" style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
               Languages
             </h3>
             <div className="space-y-2">
@@ -110,7 +110,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Certifications in sidebar */}
         {showSections.certifications && certifications.length > 0 && (
           <div className="mb-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-3 pb-2 border-b border-white/20">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white/70 mb-3 pb-2 border-b-2 border-white/20" style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
               Certifications
             </h3>
             <div className="space-y-2.5">
@@ -127,7 +127,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Awards in sidebar */}
         {showSections.awards && awards.length > 0 && (
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-3 pb-2 border-b border-white/20">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white/70 mb-3 pb-2 border-b-2 border-white/20" style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
               Awards
             </h3>
             <div className="space-y-2.5">
@@ -144,9 +144,9 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
       {/* Main Content */}
       <main className="flex-1 p-7 print:p-6">
-        {/* Header */}
-        <header className="mb-6 pb-4 border-b-2 border-gray-200">
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-1">
+        {/* Header - Vintage style */}
+        <header className="mb-6 pb-4 border-b-2 border-[#d4c9b8]">
+          <h1 className="text-3xl font-bold text-[#2c2416] tracking-tight mb-1" style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.1em' }}>
             {personalInfo.fullName || 'Your Name'}
           </h1>
           <p className={`text-lg ${colors.text} font-semibold`}>
@@ -157,8 +157,8 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Professional Summary */}
         {showSections.summary && summary && (
           <section className="mb-6">
-            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 flex items-center gap-2`}>
-              <span className={`w-8 h-0.5 ${colors.light.replace('bg-', 'bg-').replace('50', '600')}`}></span>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-2 flex items-center gap-2`} style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
+              <span className={`w-12 h-0.5 ${colors.light.replace('bg-', 'bg-').replace('50', '200')}`}></span>
               Professional Summary
             </h2>
             <p className="text-gray-600 leading-relaxed text-[0.9rem]">{summary}</p>
@@ -168,28 +168,28 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Experience */}
         {showSections.experience && experience.length > 0 && (
           <section className="mb-6">
-            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`}>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`} style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
               <Briefcase size={16} />
               Work Experience
             </h2>
             <div className="space-y-4">
               {experience.map((exp, index) => (
-                <article key={exp.id} className={`${index > 0 ? 'pt-4 border-t border-gray-100' : ''}`}>
+                <article key={exp.id} className={`${index > 0 ? 'pt-4 border-t border-[#e8dcc8]' : ''}`}>
                   <div className="flex justify-between items-start gap-4 mb-1">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-gray-900 text-base">{exp.position}</h3>
+                      <h3 className="font-bold text-[#2c2416] text-base">{exp.position}</h3>
                       <p className={`${colors.text} font-medium text-[0.9rem]`}>{exp.company}</p>
                     </div>
-                    <div className="flex items-center gap-1.5 text-gray-500 text-sm whitespace-nowrap">
+                    <div className="flex items-center gap-1.5 text-[#7a6b5a] text-sm whitespace-nowrap">
                       <Calendar size={13} />
                       <span>{exp.startDate} — {exp.current ? 'Present' : exp.endDate}</span>
                     </div>
                   </div>
                   {exp.location && (
-                    <p className="text-sm text-gray-500 mb-1.5">{exp.location}</p>
+                    <p className="text-sm text-[#7a6b5a] mb-1.5">{exp.location}</p>
                   )}
                   {exp.description && (
-                    <p className="text-gray-600 text-[0.85rem] leading-relaxed whitespace-pre-line">{exp.description}</p>
+                    <p className="text-[#5a4a3a] text-[0.85rem] leading-relaxed whitespace-pre-line">{exp.description}</p>
                   )}
                 </article>
               ))}
@@ -200,25 +200,25 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Education */}
         {showSections.education && education.length > 0 && (
           <section className="mb-6">
-            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`}>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`} style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
               <GraduationCap size={16} />
               Education
             </h2>
             <div className="space-y-3">
               {education.map((edu, index) => (
-                <article key={edu.id} className={`${index > 0 ? 'pt-3 border-t border-gray-100' : ''}`}>
+                <article key={edu.id} className={`${index > 0 ? 'pt-3 border-t border-[#e8dcc8]' : ''}`}>
                   <div className="flex justify-between items-start gap-4">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-gray-900">{edu.degree}</h3>
-                      <p className="text-gray-700">{edu.field}</p>
+                      <h3 className="font-bold text-[#2c2416]">{edu.degree}</h3>
+                      <p className="text-[#3a3228]">{edu.field}</p>
                       <p className={`${colors.text} text-sm font-medium`}>{edu.institution}</p>
                     </div>
-                    <div className="text-sm text-gray-500 whitespace-nowrap">
+                    <div className="text-sm text-[#7a6b5a] whitespace-nowrap">
                       {edu.startYear} — {edu.endYear}
                     </div>
                   </div>
-                  {edu.gpa && <p className="text-sm text-gray-500 mt-1">GPA: {edu.gpa}</p>}
-                  {edu.description && <p className="text-gray-600 text-sm mt-1.5">{edu.description}</p>}
+                  {edu.gpa && <p className="text-sm text-[#7a6b5a] mt-1">GPA: {edu.gpa}</p>}
+                  {edu.description && <p className="text-[#5a4a3a] text-sm mt-1.5">{edu.description}</p>}
                 </article>
               ))}
             </div>
@@ -228,21 +228,21 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Projects */}
         {showSections.projects && projects.length > 0 && (
           <section>
-            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`}>
-              <span className={`w-8 h-0.5 ${colors.light.replace('bg-', 'bg-').replace('50', '600')}`}></span>
+            <h2 className={`text-sm font-bold uppercase tracking-wider ${colors.text} mb-3 flex items-center gap-2`} style={{ fontFamily: "'Poiret One', cursive", letterSpacing: '0.15em' }}>
+              <span className={`w-12 h-0.5 ${colors.light.replace('bg-', 'bg-').replace('50', '200')}`}></span>
               Projects
             </h2>
             <div className="space-y-3">
               {projects.map((project) => (
                 <article key={project.id}>
-                  <h3 className="font-bold text-gray-900">{project.name}</h3>
+                  <h3 className="font-bold text-[#2c2416]">{project.name}</h3>
                   {project.description && (
-                    <p className="text-gray-600 text-sm mt-1">{project.description}</p>
+                    <p className="text-[#5a4a3a] text-sm mt-1">{project.description}</p>
                   )}
                   {project.technologies && project.technologies.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mt-2">
                       {project.technologies.map((tech, i) => (
-                        <span key={i} className={`px-2 py-0.5 ${colors.light} ${colors.text} text-xs rounded font-medium`}>
+                        <span key={i} className={`px-2 py-0.5 ${colors.light} ${colors.text} text-xs border border-[#d4c9b8] font-medium`}>
                           {tech}
                         </span>
                       ))}

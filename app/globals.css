@@ -1,14 +1,19 @@
+/* Font imports must come first */
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Poiret+One&family=Special+Elite&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Canva-inspired Design System */
+/* Art Deco / Vintage Retro Design System */
 @theme inline {
   /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-sans: 'Didact Gothic', system-ui, -apple-system, sans-serif;
+  --font-display: 'Poiret One', cursive;
+  --font-typewriter: 'Special Elite', cursive;
   --font-mono: var(--font-geist-mono), monospace;
 
   /* Sidebar colors */
@@ -57,114 +62,115 @@
 }
 
 :root {
-  /* Blue Ocean Palette */
-  --radius: 0.75rem;
+  /* Art Deco / Vintage Retro Color Palette */
+  --radius: 0.25rem;
 
-  /* Base colors */
-  --background: #f8fafc;
-  --foreground: #0c1929;
+  /* Base colors - Cream & Paper tones */
+  --background: #f5f0e8;
+  --foreground: #2c2416;
 
-  /* Cards & Surfaces */
-  --card: #ffffff;
-  --card-foreground: #0c1929;
-  --popover: #ffffff;
-  --popover-foreground: #0c1929;
+  /* Cards & Surfaces - Vintage paper */
+  --card: #faf7f2;
+  --card-foreground: #2c2416;
+  --popover: #faf7f2;
+  --popover-foreground: #2c2416;
 
-  /* Ocean Deep Blue - Primary */
-  --primary: #0369a1;
-  --primary-foreground: #ffffff;
+  /* Primary - Vintage Brown */
+  --primary: #6b4423;
+  --primary-foreground: #faf7f2;
 
-  /* Secondary - Sea foam blue */
-  --secondary: #e0f2fe;
-  --secondary-foreground: #0369a1;
+  /* Secondary - Sepia */
+  --secondary: #8b6914;
+  --secondary-foreground: #faf7f2;
 
-  /* Muted - Light sea mist */
-  --muted: #f0f9ff;
-  --muted-foreground: #64748b;
+  /* Muted - Aged paper */
+  --muted: #ebe4d8;
+  --muted-foreground: #7a6b5a;
 
-  /* Accent - Aqua/Turquoise */
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
+  /* Accent - Gold/Brass */
+  --accent: #c4a35a;
+  --accent-foreground: #2c2416;
 
-  /* Destructive - Coral sunset */
-  --destructive: #ff6b6b;
+  /* Destructive - Vintage Red */
+  --destructive: #a63d26;
+  --destructive-foreground: #faf7f2;
 
-  /* Borders & Inputs */
-  --border: #cbd5e1;
-  --input: #cbd5e1;
-  --ring: #0369a1;
+  /* Borders & Inputs - Ink colors */
+  --border: #d4c9b8;
+  --input: #d4c9b8;
+  --ring: #6b4423;
 
-  /* Ocean Chart Colors - Marine palette */
-  --chart-1: #0369a1;
-  --chart-2: #06b6d4;
-  --chart-3: #0ea5e9;
-  --chart-4: #14b8a6;
-  --chart-5: #f59e0b;
+  /* Chart Colors - Vintage palette */
+  --chart-1: #6b4423;
+  --chart-2: #8b6914;
+  --chart-3: #c4a35a;
+  --chart-4: #a63d26;
+  --chart-5: #3d5a47;
 
-  /* Sidebar - Ocean breeze */
-  --sidebar: #ffffff;
-  --sidebar-foreground: #0c1929;
-  --sidebar-primary: #0369a1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e0f2fe;
-  --sidebar-accent-foreground: #0369a1;
-  --sidebar-border: #cbd5e1;
-  --sidebar-ring: #0369a1;
+  /* Sidebar - Vintage */
+  --sidebar: #faf7f2;
+  --sidebar-foreground: #2c2416;
+  --sidebar-primary: #6b4423;
+  --sidebar-primary-foreground: #faf7f2;
+  --sidebar-accent: #ebe4d8;
+  --sidebar-accent-foreground: #6b4423;
+  --sidebar-border: #d4c9b8;
+  --sidebar-ring: #6b4423;
 
-  /* Ocean colors for easy access */
-  --ocean-deep: #0369a1;
-  --ocean-deep-dark: #0c4a6e;
-  --ocean-deep-light: #0ea5e9;
-  --ocean-aqua: #06b6d4;
-  --ocean-teal: #14b8a6;
-  --ocean-sky: #0ea5e9;
-  --ocean-foam: #ccfbf1;
-  --ocean-coral: #ff6b6b;
-  --ocean-sunset: #f59e0b;
-  --ocean-pearl: #f1f5f9;
+  /* Quick access colors */
+  --vintage-cream: #f5f0e8;
+  --vintage-paper: #faf7f2;
+  --vintage-brown: #6b4423;
+  --vintage-gold: #c4a35a;
+  --vintage-sepia: #8b6914;
+  --vintage-ink: #2c2416;
+  --vintage-red: #a63d26;
+  --vintage-green: #3d5a47;
 }
 
 .dark {
-  --background: #0c1929;
-  --foreground: #f1f5f9;
+  /* Dark vintage - aged ink tones */
+  --background: #1a1612;
+  --foreground: #ebe4d8;
 
-  --card: #0f2744;
-  --card-foreground: #f1f5f9;
-  --popover: #0f2744;
-  --popover-foreground: #f1f5f9;
+  --card: #241e18;
+  --card-foreground: #ebe4d8;
+  --popover: #241e18;
+  --popover-foreground: #ebe4d8;
 
-  --primary: #0ea5e9;
-  --primary-foreground: #ffffff;
+  --primary: #c4a35a;
+  --primary-foreground: #1a1612;
 
-  --secondary: #0c4a6e;
-  --secondary-foreground: #bae6fd;
+  --secondary: #8b6914;
+  --secondary-foreground: #ebe4d8;
 
-  --muted: #0f2744;
-  --muted-foreground: #94a3b8;
+  --muted: #2c2416;
+  --muted-foreground: #9a8b7a;
 
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
+  --accent: #d4a574;
+  --accent-foreground: #1a1612;
 
-  --destructive: #ff6b6b;
+  --destructive: #c45a45;
+  --destructive-foreground: #ebe4d8;
 
-  --border: #1e3a5f;
-  --input: #1e3a5f;
-  --ring: #0ea5e9;
+  --border: #3d3428;
+  --input: #3d3428;
+  --ring: #c4a35a;
 
-  --chart-1: #0ea5e9;
-  --chart-2: #22d3ee;
-  --chart-3: #38bdf8;
-  --chart-4: #2dd4bf;
-  --chart-5: #fbbf24;
+  --chart-1: #c4a35a;
+  --chart-2: #d4a574;
+  --chart-3: #8b6914;
+  --chart-4: #c45a45;
+  --chart-5: #5a7a64;
 
-  --sidebar: #0f2744;
-  --sidebar-foreground: #f1f5f9;
-  --sidebar-primary: #0ea5e9;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #0c4a6e;
-  --sidebar-accent-foreground: #bae6fd;
-  --sidebar-border: #1e3a5f;
-  --sidebar-ring: #0ea5e9;
+  --sidebar: #241e18;
+  --sidebar-foreground: #ebe4d8;
+  --sidebar-primary: #c4a35a;
+  --sidebar-primary-foreground: #1a1612;
+  --sidebar-accent: #2c2416;
+  --sidebar-accent-foreground: #c4a35a;
+  --sidebar-border: #3d3428;
+  --sidebar-ring: #c4a35a;
 }
 
 @layer base {
@@ -174,102 +180,226 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Didact Gothic', system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
+  /* Heading font - Art Deco style */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poiret One', cursive;
+    font-weight: 400;
+    letter-spacing: 0.1em;
   }
 
-  /* Focus styles - Canva uses purple ring */
+  /* Smooth scrolling with reduced motion support */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Focus styles - proper ring for accessibility */
   :focus-visible {
     @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
   }
+
+  /* Better link styles */
+  a {
+    @apply cursor-pointer transition-colors duration-200;
+  }
 }
 
-/* Ocean-inspired utility classes */
+/* Retro / Vintage utility classes */
 @layer utilities {
-  /* Gradient backgrounds */
-  .bg-ocean-gradient {
-    background: linear-gradient(135deg, #0369a1 0%, #06b6d4 100%);
+  /* Gradient backgrounds - Vintage style */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #6b4423 0%, #8b6914 100%);
   }
 
-  .bg-ocean-gradient-soft {
-    background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
+  .bg-gradient-gold {
+    background: linear-gradient(135deg, #c4a35a 0%, #d4a574 100%);
+  }
+
+  .bg-gradient-vintage {
+    background: linear-gradient(135deg, #f5f0e8 0%, #ebe4d8 100%);
   }
 
   /* Text gradients */
-  .text-ocean-gradient {
-    background: linear-gradient(135deg, #0369a1 0%, #06b6d4 100%);
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #6b4423 0%, #8b6914 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Ocean shadow styles */
-  .shadow-ocean {
-    box-shadow: 0 2px 8px rgba(3, 105, 161, 0.08), 0 1px 2px rgba(3, 105, 161, 0.04);
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #c4a35a 0%, #d4a574 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .shadow-ocean-md {
-    box-shadow: 0 4px 16px rgba(3, 105, 161, 0.1), 0 2px 4px rgba(3, 105, 161, 0.04);
+  /* Vintage paper texture */
+  .paper-texture {
+    background-color: #faf7f2;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.01) 2px,
+        rgba(0, 0, 0, 0.01) 4px
+      );
   }
 
-  .shadow-ocean-lg {
-    box-shadow: 0 8px 32px rgba(3, 105, 161, 0.12), 0 4px 8px rgba(3, 105, 161, 0.04);
+  /* Art Deco border styles */
+  .border-deco {
+    border: 2px solid #6b4423;
+    position: relative;
   }
 
-  .shadow-ocean-deep {
-    box-shadow: 0 4px 20px rgba(3, 105, 161, 0.25);
+  .border-deco::before,
+  .border-deco::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #c4a35a;
   }
 
-  /* Hover lift effect */
-  .hover-lift {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .border-deco::before {
+    top: -4px;
+    left: -4px;
+    border-right: none;
+    border-bottom: none;
   }
 
-  .hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(3, 105, 161, 0.12);
+  .border-deco::after {
+    bottom: -4px;
+    right: -4px;
+    border-left: none;
+    border-top: none;
   }
 
-  /* Ocean button styles */
-  .btn-ocean {
-    @apply rounded-lg font-semibold transition-all duration-200;
+  /* Vintage shadow styles */
+  .shadow-vintage {
+    box-shadow:
+      4px 4px 0 rgba(107, 68, 35, 0.1),
+      8px 8px 0 rgba(107, 68, 35, 0.05);
   }
 
-  .btn-ocean:hover {
-    transform: translateY(-1px);
+  .shadow-vintage-deep {
+    box-shadow:
+      6px 6px 0 rgba(107, 68, 35, 0.15),
+      12px 12px 0 rgba(107, 68, 35, 0.08);
   }
 
-  .btn-ocean:active {
-    transform: translateY(0);
+  /* Hover effect for retro style */
+  .hover-vintage {
+    transition: all 0.2s ease;
+  }
+
+  .hover-vintage:hover {
+    box-shadow:
+      6px 6px 0 rgba(107, 68, 35, 0.2),
+      12px 12px 0 rgba(107, 68, 35, 0.1);
+    transform: translate(-2px, -2px);
+  }
+
+  /* Interactive cursor utility */
+  .cursor-interactive {
+    cursor: pointer;
+  }
+
+  /* Touch target utilities */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Focus visible enhancement */
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Ornamental divider */
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c4a35a, transparent);
+  }
+
+  /* Typewriter effect */
+  .typewriter {
+    font-family: 'Special Elite', cursive;
+  }
+
+  /* Art Deco heading */
+  .deco-heading {
+    font-family: 'Poiret One', cursive;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .hover-vintage,
+    .hover-vintage:hover {
+      transform: none;
+      transition: none;
+    }
   }
 }
 
-/* Custom scrollbar - Ocean style */
+/* Custom scrollbar - Vintage style */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #ebe4d8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 4px;
+  background: #6b4423;
+  border-radius: 2px;
+  border: 2px solid #ebe4d8;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: #8b6914;
 }
 
-/* Selection color - Ocean blue */
+.dark ::-webkit-scrollbar-track {
+  background: #2c2416;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #c4a35a;
+  border-color: #2c2416;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #d4a574;
+}
+
+/* Selection color - Vintage brown */
 ::selection {
-  background: rgba(3, 105, 161, 0.2);
+  background: rgba(107, 68, 35, 0.2);
   color: inherit;
 }
 
